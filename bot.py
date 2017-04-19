@@ -2,6 +2,7 @@ import tweepy # for tweeting
 import secrets # shhhh
 import requests
 import json
+import urllib2
 from book_manager import BookManager # for getting sentences out of our book file
 
 def get_next_chunk():
