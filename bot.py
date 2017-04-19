@@ -22,8 +22,7 @@ def get_next_chunk():
   return chunk
 
 def match_lyrics():
-  data = requests.get('http://api.lololyrics.com/0.5/getLyric?artist=kanyewest&track=graduation')
-  e = xml.etree.ElementTree.parse(data).getroot()
+  e = xml.etree.ElementTree.parse('http://api.lololyrics.com/0.5/getLyric?artist=kanyewest&track=graduation').getroot()
   print(e)
 
 def tweet(message):
