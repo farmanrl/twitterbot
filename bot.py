@@ -21,11 +21,9 @@ def get_next_chunk():
   return chunk
 
 def match_lyrics():
-  data = json.load(urllib.request.urlopen('http://api.lololyrics.com/0.5/getLyric?artist=kanyewest&track=graduation'))
-  print(data['lyric'])
-  lyrics = str(data['lyric']).split()
-  return lyrics[0]
-
+  data = requests.get('http://api.lololyrics.com/0.5/getLyric?artist=kanyewest&track=graduation')
+  lyric_json = data.json()
+  print(lyric_json)
 
 def tweet(message):
   auth = tweepy.OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
