@@ -2,7 +2,7 @@ import tweepy # for tweeting
 import secrets # shhhh
 import requests
 import json
-import urllib2
+import urllib
 from book_manager import BookManager # for getting sentences out of our book file
 
 def get_next_chunk():
@@ -21,7 +21,7 @@ def get_next_chunk():
   return chunk
 
 def match_lyrics():
-  data = json.load(urllib2.urlopen('http://lyric-api.herokuapp.com/api/find/John%20Lennon/Imagine'))
+  data = json.load(urllib.urlopen('http://lyric-api.herokuapp.com/api/find/John%20Lennon/Imagine'))
   print(data['lyric'])
   lyrics = str(data['lyric']).split()
   return lyrics[0]
