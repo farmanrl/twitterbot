@@ -22,7 +22,7 @@ def get_next_chunk():
 def match_lyrics():
   data = json.load(urllib2.urlopen('http://lyric-api.herokuapp.com/api/find/John%20Lennon/Imagine'))
   print(data['lyric'])
-  lyrics = str(data['lyric']).split())
+  lyrics = str(data['lyric']).split()
   return lyrics[0]
 
 
