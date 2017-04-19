@@ -1,30 +1,31 @@
 import tweepy # for tweeting
 import secrets # shhhh
-import requests
-import json
-from urllib.request import urlopen
 from book_manager import BookManager # for getting sentences out of our book file
-
+from nltk.sentiment import SentimentAnalyzer
 def get_next_chunk():
   # open text file
   book = BookManager()
   first_sentence = book.first_sentence()
   # tweet the whole sentence if it's short enough
-  if len(first_sentence) <= 140:
+  if len(first_sentence) <= 137:
     chunk = first_sentence
   # otherwise just print the first 140 characters
   else:
-    chunk = first_sentence[0:140]
-
+    chunk = first_sentence[0:137]
   # delete what we just tweeted from the text file
   book.delete_message(chunk)
+  chunk = chunk + get_sentiment(chunk)
+  print(chunk)
   return chunk
 
-def match_lyrics():
-  data = json.load(urlopen('http://lyric-api.herokuapp.com/api/find/John%20Lennon/Imagine'))
-  print(data['lyric'])
-  print(str(data['lyric']).split())
-
+def get_sentiment(string):
+  pos = 1
+  neg = 0
+  if pos > neg:
+    response = ':)'
+  else:
+    response = ':('
+  return response
 
 def tweet(message):
   auth = tweepy.OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
@@ -35,4 +36,4 @@ def tweet(message):
   api.update_status(status=message)
 
 if __name__ == '__main__':
-  tweet(match_lyrics())
+  tweet(get_next_chunk())
