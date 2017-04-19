@@ -2,8 +2,7 @@ import tweepy # for tweeting
 import secrets # shhhh
 import requests
 import json
-import urllib
-import xml.etree.ElementTree
+from urllib.request import urlopen
 from book_manager import BookManager # for getting sentences out of our book file
 
 def get_next_chunk():
@@ -22,8 +21,10 @@ def get_next_chunk():
   return chunk
 
 def match_lyrics():
-  e = xml.etree.ElementTree.parse('http://api.lololyrics.com/0.5/getLyric?artist=kanyewest&track=graduation').getroot()
-  print(e)
+  data = json.load(urlopen('http://lyric-api.herokuapp.com/api/find/John%20Lennon/Imagine'))
+  print(data['lyric'])
+  print(str(data['lyric']).split())
+
 
 def tweet(message):
   auth = tweepy.OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
