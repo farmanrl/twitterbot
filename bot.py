@@ -21,7 +21,7 @@ def get_next_chunk():
   return chunk
 
 def match_lyrics():
-  data = json.load(urllib.urlopen('http://lyric-api.herokuapp.com/api/find/John%20Lennon/Imagine'))
+  data = json.load(urllib.request.urlopen('http://lyric-api.herokuapp.com/api/find/John%20Lennon/Imagine'))
   print(data['lyric'])
   lyrics = str(data['lyric']).split()
   return lyrics[0]
