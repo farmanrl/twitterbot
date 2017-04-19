@@ -2,6 +2,7 @@ import tweepy # for tweeting
 import secrets # shhhh
 from book_manager import BookManager # for getting sentences out of our book file
 from nltk.sentiment import SentimentAnalyzer
+
 def get_next_chunk():
   # open text file
   book = BookManager()
@@ -14,7 +15,7 @@ def get_next_chunk():
     chunk = first_sentence[0:137]
   # delete what we just tweeted from the text file
   book.delete_message(chunk)
-  chunk = chunk + get_sentiment(chunk)
+  chunk = chunk.strip() + get_sentiment(chunk)
   print(chunk)
   return chunk
 
@@ -22,9 +23,9 @@ def get_sentiment(string):
   pos = 1
   neg = 0
   if pos > neg:
-    response = ':)'
+    response = ' :)'
   else:
-    response = ':('
+    response = ' :('
   return response
 
 def tweet(message):
