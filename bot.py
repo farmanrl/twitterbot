@@ -3,6 +3,7 @@ import secrets # shhhh
 import requests
 import json
 import urllib
+import xml.etree.ElementTree
 from book_manager import BookManager # for getting sentences out of our book file
 
 def get_next_chunk():
@@ -22,8 +23,8 @@ def get_next_chunk():
 
 def match_lyrics():
   data = requests.get('http://api.lololyrics.com/0.5/getLyric?artist=kanyewest&track=graduation')
-  lyric_json = data.json()
-  print(lyric_json)
+  e = xml.etree.ElementTree.parse(data).getroot()
+  print(e)
 
 def tweet(message):
   auth = tweepy.OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
